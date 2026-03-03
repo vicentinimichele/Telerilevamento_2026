@@ -32,3 +32,14 @@ cl <- colorRampPalette(c("gray1", "gray73", "gray100"))(100)
 plot(b2, col=cl)
 
 # par = obrobrio
+par(mfrow=c(1,2))
+plot(b2, col=inferno (100))
+plot(b2, col=cl)
+
+# per chiudere le finestre grafiche
+dev.off()
+
+#funzione faciel facile per par
+im.multiframe(1,2)
+plot(b2, col=inferno (100))
+plot(b2, col=cl)
