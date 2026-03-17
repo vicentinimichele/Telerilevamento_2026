@@ -47,10 +47,49 @@ plot(dvi1992) # dove ci sono valori alti c'è tanta vegetazione, vediamo il rang
 
 # minimo e massimo 4 bit -15 e +15 
 
-dvi2006 <- mato2006[[1]] - mato2006[[2]] # 1 per dire il NIR, e due per il rosso
+# per poter confrontare DVI di diverse grandezze di immagini su usa il NDVI, si standardizzano i dati 
+# 8 bit
+# (NIR - red) / (NIR + red) = (255 - 0) / (255 + 0) = +1 massimo NDVI
+# (NIR - red) / (NIR + red) = (0 - 255) / (0 + 255) = -1 minimo NDVI
+# NDVI 4 bit: range (0-15)
+# (NIR - red) / (NIR + red) = (15 - 0) / (15 + 0) = 1 massimo
+# (NIR - red) / (NIR + red) = (0 - 15) / (0 + 15) = -1 minimo
 
+im.multiframe(1,2)
+ndvi1992 = (mato1992[[1]] - mato1992[[2]]) / (mato1992[[1]] + mato1992[[2]])
+# ndvi1992 = dvi1992 / (mato1992[[1]] + mato1992[[2]])
+plot(ndvi1992)
 
+ndvi2006 = (mato2006[[1]] - mato2006[[2]]) / (mato2006[[1]] + mato2006[[2]])
+# ndvi2006 = dvi2006 / (mato2006[[1]] + mato2006[[2]])
+plot(ndvi2006)
 
+im.multiframe(1,2)
+plot(ndvi1992, col=inferno(100))
+plot(ndvi2006, col=inferno(100))
 
+# DVI imageRy
+dvi1992 <- im.dvi(mato1992, 1,2)
+dvi2006 <- im.dvi(mato2006, 1,2)
 
+im.multiframe(1,2)
+plot(dvi1992, col=inferno(100))
+plot(dvi2006, col=inferno(100))
+
+dev.off()
+
+# NDVI imageRy
+ndvi1992 <- im.ndvi(mato1992, 1,2)
+ndvi2006 <- im.ndvi(mato2006, 1,2)
+
+im.multiframe(1,2)
+plot(ndvi1992, col=inferno(100))
+plot(ndvi2006, col=inferno(100))
+
+im.multiframe(2,2)
+plot(dvi1992, col=inferno(100))
+plot(dvi2006, col=inferno(100))
+
+plot(ndvi1992, col=inferno(100))
+plot(ndvi2006, col=inferno(100))
 
